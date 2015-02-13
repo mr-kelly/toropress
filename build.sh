@@ -1,1 +1,2 @@
-go build -ldflags "-s" app.go
+#!/bin/bash
+go build -ldflags "-s -w" ./app.go

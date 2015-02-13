@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/astaxie/beego"
 	"toropress/handlers"
 	"toropress/handlers/root"
@@ -8,9 +9,13 @@ import (
 )
 
 func main() {
+	fmt.Println("Starting...")
 	models.CreateDb()
+	beego.SetStaticPath("/static/", "static/")
+	beego.SetStaticPath("/archives/", "archives/")
 	beego.SetStaticPath("/static", "static/")
 	beego.SetStaticPath("/archives", "archives/")
+
 
 	beego.Router("/", &handlers.MainHandler{})
 	beego.Router("/category/:cid:int", &handlers.MainHandler{})
@@ -18,6 +23,7 @@ func main() {
 
 	beego.Router("/node/:nid:int", &handlers.NodeHandler{})
 	beego.Router("/view/:tid:int", &handlers.ViewHandler{})
+
 
 	beego.Router("/register", &handlers.RegHandler{})
 	beego.Router("/login", &handlers.LoginHandler{})

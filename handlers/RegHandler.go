@@ -23,7 +23,7 @@ func (self *RegHandler) Post() {
 	password := self.Ctx.Request.Form.Get("password")
 	usererr := helper.CheckUsername(username)
 
-	fmt.Println(usererr)
+
 	if usererr == false {
 		self.Data["UsernameErr"] = "Username error, Please to again"
 		return
@@ -39,20 +39,30 @@ func (self *RegHandler) Post() {
 
 	//now := torgo.Date(time.Now(), "Y-m-d H:i:s")
 
-	userInfo := models.GetUserByNickname(username)
+	userInfo := models.CheckUserByNickname(username)
+	fmt.Println("=============================")
+	fmt.Println(userInfo.Nickname)
 
-	if userInfo.Nickname == "" {
-		models.AddUser(username+"@insion.co", username, "", pwd, 1)
+	//  检查该用户是否已经被注册
+		if userInfo.Nickname == "" {
 
-		//登录成功设置session
-		self.SetSession("userid", userInfo.Id)
-		self.SetSession("username", userInfo.Nickname)
-		self.SetSession("userrole", userInfo.Role)
-		self.SetSession("useremail", userInfo.Email)
+			//注册用户
+			regErr := models.AddUser(username+"@insion.co", username, "", pwd, 1)
+			fmt.Println("reg:s")
+			fmt.Println(regErr)
+			fmt.Println("reg:e ")
+			//注册成功设置session
+		//	self.SetSession("userid", userInfo.Id)
+		//	self.SetSession("username", userInfo.Nickname)
+		//	self.SetSession("userrole", userInfo.Role)
+		//	self.SetSession("useremail", userInfo.Email)
+			self.Ctx.Redirect(302, "/login")
 
-		self.Ctx.Redirect(302, "/login")
-	} else {
-		self.Data["UsernameErr"] = "User already exists"
-	}
+
+
+
+		} else {
+			self.Data["UsernameErr"] = "User already exists"
+		}
 	self.Render()
 }
