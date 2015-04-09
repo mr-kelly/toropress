@@ -12,7 +12,7 @@ type ViewHandler struct {
 }
 
 func (self *ViewHandler) Get() {
-	tid, _ := self.GetInt(":tid")
+	tid, _ := self.GetInt64(":tid")
 	tid_handler := models.GetTopic(tid)
 
 	self.TplNames = "view.html"

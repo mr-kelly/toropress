@@ -46,7 +46,7 @@ func (self *RUploaderHandler) Post() {
 		targetFolder := "/archives/upload/"
 
 		file, handler, e := self.GetFile("uploadfile")
-		pid, _ := self.GetInt("pid")
+		pid, _ := self.GetInt64("pid")
 
 		if e != nil {
 			self.Data["MsgErr"] = "0"

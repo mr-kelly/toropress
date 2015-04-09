@@ -16,7 +16,7 @@ func (self *RSettingHandler) Get() {
 	self.DelSession("MsgErr")
 	switch {
 	case helper.Rex(self.Ctx.Request.RequestURI, "^/root-setting-setroot-del/([0-9]+)$"):
-		rootid, _ := self.GetInt(":rid")
+		rootid, _ := self.GetInt64(":rid")
 		if e := models.DelUser(rootid); e != nil {
 			self.Data["MsgErr"] = "删除管理员失败！"
 		} else {
@@ -27,7 +27,7 @@ func (self *RSettingHandler) Get() {
 
 	case helper.Rex(self.Ctx.Request.RequestURI, "^/root-setting-setroot-edit/([0-9]+)$"):
 		self.Data["asidepage"] = "root_setting_setroot_edit"
-		rootid, _ := self.GetInt(":rid")
+		rootid, _ := self.GetInt64(":rid")
 		self.Data["root"] = models.GetUser(rootid)
 		self.TplNames = "root/setting_setroot.html"
 

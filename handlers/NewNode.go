@@ -18,7 +18,7 @@ func (self *NewNodeHandler) Get() {
 }
 
 func (self *NewNodeHandler) Post() {
-	cid, _ := self.GetInt("category")
+	cid, _ := self.GetInt64("category")
 	uid, _ := self.GetSession("userid").(int64)
 	nid_title := self.GetString("title")
 	nid_content := self.GetString("content")

@@ -12,7 +12,7 @@ type NewReplyHandler struct {
 }
 
 func (self *NewReplyHandler) Post() {
-	tid, _ := self.GetInt("comment_parent")
+	tid, _ := self.GetInt64("comment_parent")
 	sess_userid, _ := self.GetSession("userid").(int64)
 
 	gmt, _ := self.Ctx.Request.Cookie("gmt")

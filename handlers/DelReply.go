@@ -10,7 +10,7 @@ type DeleteReplyHandler struct {
 }
 
 func (self *DeleteReplyHandler) Get() {
-	rid, _ := self.GetInt(":rid")
+	rid, _ := self.GetInt64(":rid")
 	models.DelReply(rid)
 	self.Ctx.Redirect(302, "/")
 }

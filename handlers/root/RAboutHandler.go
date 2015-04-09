@@ -16,7 +16,7 @@ type RAboutHandler struct {
 
 func (self *RAboutHandler) Get() {
 	self.Data["catpage"] = "about"
-	tid, _ := self.GetInt(":tid")
+	tid, _ := self.GetInt64(":tid")
 	self.Data["topic"] = models.GetTopic(tid)
 	self.Data["topics"] = models.GetAllTopicByCid(1, 0, 0, 1, "id")
 	self.Data["nodes"] = models.GetAllNodeByCid(1, 0, 0, 0, "id")
@@ -76,7 +76,7 @@ func (self *RAboutHandler) Post() {
 		switch {
 		case helper.Rex(self.Ctx.Request.RequestURI, "^/root-about-edit/([0-9]+)$"):
 			//编辑POST状态
-			tid, _ := self.GetInt(":tid")
+			tid, _ := self.GetInt64(":tid")
 			file, handler, e := self.GetFile("image")
 			defer file.Close()
 			if handler == nil {

@@ -10,7 +10,7 @@ type TopicDeleteHandler struct {
 }
 
 func (self *TopicDeleteHandler) Get() {
-	tid, _ := self.GetInt(":tid")
+	tid, _ := self.GetInt64(":tid")
 	models.DelTopic(tid)
 	self.Ctx.Redirect(302, "/")
 }

@@ -10,7 +10,7 @@ type NodeDeleteHandler struct {
 }
 
 func (self *NodeDeleteHandler) Get() {
-	nid, _ := self.GetInt(":nid")
+	nid, _ := self.GetInt64(":nid")
 	models.DelNode(nid)
 	self.Ctx.Redirect(302, "/")
 }

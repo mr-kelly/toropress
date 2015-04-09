@@ -11,9 +11,9 @@ type MainHandler struct {
 }
 
 func (self *MainHandler) Get() {
-	page, _ := self.GetInt("page")
+	page, _ := self.GetInt64("page")
 	curtab, _ := self.GetInt("tab")
-	cid, _ := self.GetInt(":cid")
+	cid, _ := self.GetInt64(":cid")
 	limit := 25
 	home := "false"
 	if cid == 0 {

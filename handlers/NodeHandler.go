@@ -12,7 +12,7 @@ type NodeHandler struct {
 
 func (self *NodeHandler) Get() {
 	page, _ := self.GetInt("page")
-	nid, _ := self.GetInt(":nid")
+	nid, _ := self.GetInt64(":nid")
 
 	nid_handler := models.GetNode(nid)
 	nid_handler.Views = nid_handler.Views + 1

@@ -16,7 +16,7 @@ func (self *LikeHandler) Get() {
 
 	if helper.IsSpider(self.Ctx.Request.UserAgent()) != true {
 		name := self.GetString(":name")
-		id, _ := self.GetInt(":id")
+		id, _ := self.GetInt64(":id")
 
 		if name == "topic" {
 

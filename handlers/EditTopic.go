@@ -10,7 +10,7 @@ type TopicEditHandler struct {
 }
 
 func (self *TopicEditHandler) Get() {
-	tid, _ := self.GetInt(":tid")
+	tid, _ := self.GetInt64(":tid")
 	tid_handler := models.GetTopic(tid)
 	self.Data["topic"] = tid_handler
 	self.Data["inode"] = models.GetNode(tid_handler.Nid)
@@ -21,8 +21,8 @@ func (self *TopicEditHandler) Get() {
 }
 
 func (self *TopicEditHandler) Post() {
-	tid, _ := self.GetInt(":tid")
-	nid, _ := self.GetInt("nodeid")
+	tid, _ := self.GetInt64(":tid")
+	nid, _ := self.GetInt64("nodeid")
 	cid := models.GetNode(nid).Pid
 	uid, _ := self.GetSession("userid").(int64)
 	tid_title := self.GetString("title")

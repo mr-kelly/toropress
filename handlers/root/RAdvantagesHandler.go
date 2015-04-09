@@ -24,7 +24,7 @@ func (self *RAdvantagesHandler) Get() {
 
 	case helper.Rex(self.Ctx.Request.RequestURI, "^/root-advantages-del/([0-9]+)$"):
 		//删除GET状态 删除內容
-		tid, _ := self.GetInt(":tid")
+		tid, _ := self.GetInt64(":tid")
 
 		if e := models.DelTopic(tid); e != nil {
 			self.Data["MsgErr"] = "删除內容失败！"
@@ -39,7 +39,7 @@ func (self *RAdvantagesHandler) Get() {
 	case helper.Rex(self.Ctx.Request.RequestURI, "^/root-advantages-edit/([0-9]+)$"):
 		//编辑GET状态
 		self.Data["asidepage"] = "root_advantages_edit"
-		tid, _ := self.GetInt(":tid")
+		tid, _ := self.GetInt64(":tid")
 		self.Data["topic"] = models.GetTopic(tid)
 		self.TplNames = "root/advantages.html"
 		self.Render()
@@ -64,11 +64,11 @@ func (self *RAdvantagesHandler) Post() {
 
 	title := self.GetString("title")
 	content := self.GetString("content")
-	nodeid, _ := self.GetInt("nodeid")
+	nodeid, _ := self.GetInt64("nodeid")
 	uid, _ := self.GetSession("userid").(int64)
 	uname, _ := self.GetSession("username").(string)
 
-	tid, _ := self.GetInt(":tid")
+	tid, _ := self.GetInt64(":tid")
 	file, handler, e := self.GetFile("image")
 
 	msg := ""

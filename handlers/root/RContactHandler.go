@@ -45,7 +45,7 @@ func (self *RContactHandler) Post() {
 	var cid int64 = 5
 	title := self.GetString("title")
 	content := self.GetString("content")
-	nodeid, _ := self.GetInt("nodeid")
+	nodeid, _ := self.GetInt64("nodeid")
 	uid, _ := self.GetSession("userid").(int64)
 	sess_username, _ := self.GetSession("username").(string)
 
@@ -86,7 +86,7 @@ func (self *RContactHandler) Post() {
 			switch {
 			case helper.Rex(self.Ctx.Request.RequestURI, "^/root-contact-edit/([0-9]+)$"):
 				//编辑POST状态
-				tid, _ := self.GetInt(":tid")
+				tid, _ := self.GetInt64(":tid")
 				file, handler, e := self.GetFile("image")
 				defer file.Close()
 				if handler == nil {
